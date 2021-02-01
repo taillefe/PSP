@@ -1,6 +1,7 @@
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import javax.swing.JSlider;
 import javax.swing.JProgressBar;
@@ -10,6 +11,7 @@ import java.awt.event.ActionEvent;
 
 public class Carrera {
 
+	public String nombreGanador;
 	private JFrame frame;
 	private JTextField txt1;
 	private JTextField txt2;
@@ -143,6 +145,7 @@ public class Carrera {
 		long numAleatorio;
 		
 		btnComenzar.setEnabled(false);
+		boolean noGanador = true;
 		
 		barras[0] = pb1;
 		barras[1] = pb2;
@@ -166,19 +169,46 @@ public class Carrera {
             h.setPriority(deslizadores[i].getValue());
             System.out.println("prioridad : "+ deslizadores[i].getValue());
             h.start();
-            
            
-         //   actualizarDatos(h,h.getPorcentaje());
         }
-        System.out.println("Porcentaje : "+ hilos[1].getPorcentaje());
+        
+        // nombreGanador es una variable global
+     //   JOptionPane.showMessageDialog(null, "Y EL GANADOR ES : HILO" + nombreGanador);
+    /*    try {
+            //Ponemos a "Dormir" el programa durante los ms que queremos
+            Thread.sleep(5*10);
+         } catch (Exception e) {
+            System.out.println(e);
+         }
+      */  //comprobar si alguno de los hilos llega a 100 y parar los otros dos
+        while (noGanador){
+        	for (int i = 0; i < hilos.length; i++) {
+        	//	System.out.println("PORCENTAJE HILO : "+hilos[i].getNombre() +" "+hilos[i].getPorcentaje());
+        		
+        		if (hilos[i].getPorcentaje() == 100) {
+        			// el hilo i + 1 será el ganador y hay que parar los otros dos
+        			for (int j = 0; j < hilos.length; j++) {
+        				hilos[j].setStopHilo(true);
+        			}
+        			noGanador = false;
+        			
+        		}
+        	//	System.out.println("estado hilo : "+hilos[i].getNombre() +" " + hilos[i].getState());	
+        	}
+        }
+      
+        
+        
+        // cuando da al boton de aceptar el ganador se inicializan todos los valores
+        //   actualizarDatos(h,h.getPorcentaje());
+        
         
 		
 	}
 	
 	public void actualizarDatos(Hilo h, int p) {
 		 
-   //     Hilo c = (Caballo) o;
-      //  int porcentaje = (int) arg;
+  
  
         switch (h.getNombre()) {
             case "1":

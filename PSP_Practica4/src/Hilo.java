@@ -1,6 +1,9 @@
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.JProgressBar;
 import javax.swing.JSlider;
 import javax.swing.JTextField;
+
 
 public class Hilo extends Thread{
 	
@@ -10,6 +13,7 @@ public class Hilo extends Thread{
 	private int porcentaje;
 	private JProgressBar pb;
 	private JTextField txt;
+	
 	
 	private float numSleep;
 	
@@ -39,15 +43,18 @@ public class Hilo extends Thread{
 	}
 	
 	public void setStopHilo(boolean fin) {
-		stopHilo = fin;
+		porcentaje = 101;
 	}
+	
+
 	
 	@Override
 	public void run() {
 		
-		int porcentaje = 0;
+		porcentaje = 0;
 		int numAleatorio;
-		while (!stopHilo) {
+		boolean hayGanador= false;
+	//	while (!stopHilo) {
 			try {
 	            while (porcentaje < 100) {
 	                numAleatorio = generaNumeroAleatorio(1, 15);
@@ -62,20 +69,33 @@ public class Hilo extends Thread{
 		                
 		                System.out.println("Hilo"+ nombre + "  "+ String.valueOf(porcentaje));
 		            	 // el hilo duerme el tiempo que se le pasa al constructor
-		                sleep((long) numSleep);
-	                }else 
+		              //  sleep((long) numSleep);
+		                sleep (100);
+	                }else { 
+	                	//la primera vez que se entra por aquí lo hace el hilo ganador
+	                	// se llama al jdialog y se muestra al ganador.
+	                	porcentaje = 100;
+	                	 System.out.println("HILO GANADOR"+ nombre + "  "+ String.valueOf(porcentaje));
+	                	pb.setValue(100);
+		                txt.setText("Hilo"+ nombre + "  "+ "100");
+	                	JOptionPane.showMessageDialog(null, "Y EL GANADOR ES : HILO" + nombre);
+	                	// interrupt(); 
+		              //  nombreGanador = nombre;
 	                	System.out.println("GANADOR");
 	                	// si ha ganado sale de la ejecución e interrumpe la ejecución del resto de hilos
-	            }
+	                	// manda mensaje de interrumpir los hilos y salir
+	                }	
+				}
 	            stopHilo = true;
 	            System.out.println("fin");
 	           // terminar();
-	            interrupt();
+	         
+	           
 	           
 	        } catch (InterruptedException ex) {
 	            System.out.println("Hilo interrumpido");
 	        }
-		}
+	//	}
 		System.out.println(stopHilo);
     }
  
