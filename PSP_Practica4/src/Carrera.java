@@ -73,7 +73,10 @@ public class Carrera {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				comenzarCarrera();
-				
+				 // cuando da al boton de aceptar el ganador se inicializan todos los valores
+		          inicializarDatos();
+            
+			
 			}
 		});
 		btnComenzar.setBounds(186, 11, 201, 23);
@@ -181,11 +184,12 @@ public class Carrera {
             System.out.println(e);
          }
       */  //comprobar si alguno de los hilos llega a 100 y parar los otros dos
-        while (noGanador){
+    /*    while (noGanador){
         	for (int i = 0; i < hilos.length; i++) {
         	//	System.out.println("PORCENTAJE HILO : "+hilos[i].getNombre() +" "+hilos[i].getPorcentaje());
         		
         		if (hilos[i].getPorcentaje() == 100) {
+        			System.out.println("AAAAAAA");
         			// el hilo i + 1 será el ganador y hay que parar los otros dos
         			for (int j = 0; j < hilos.length; j++) {
         				hilos[j].setStopHilo(true);
@@ -196,44 +200,27 @@ public class Carrera {
         	//	System.out.println("estado hilo : "+hilos[i].getNombre() +" " + hilos[i].getState());	
         	}
         }
-      
-        
-        
-        // cuando da al boton de aceptar el ganador se inicializan todos los valores
-        //   actualizarDatos(h,h.getPorcentaje());
-        
-        
-		
+     */
+     
 	}
 	
-	public void actualizarDatos(Hilo h, int p) {
+	public void inicializarDatos() {
 		 
-  
+		 btnComenzar.setEnabled(true);
  
-        switch (h.getNombre()) {
-            case "1":
-                pb1.setValue(p);
-                break;
- 
-            case "2":
-                pb2.setValue(p);
-                break;
- 
-            case "3":
-                pb3.setValue(p);
-                break;
-            }
- 
-        if(p>=100){
-           terminar();
-           btnComenzar.setEnabled(true);
-           // lanzar mensaje con caballo ganador
-//           this.lblGanador.setText("Caballo "+h.getNombre());
-           System.out.println("Hilo ganador "+h.getNombre());
+		 pb1.setValue(0);
+		 pb2.setValue(0);
+		 pb3.setValue(0);
+		txt1.setName("Hilo1 :  ");
+		txt2.setName("Hilo2 :  ");
+		txt3.setName("Hilo3 :  ");
+		sld1.setValue(5);
+		sld2.setValue(5);
+		sld3.setValue(5);
+		
         }
          
-         
-    }
+
 	
 	private void terminar(){
         
