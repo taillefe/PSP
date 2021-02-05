@@ -54,20 +54,22 @@ public class Hilo extends Thread{
 		porcentaje = 0;
 		int numAleatorio;
 		boolean hayGanador= false;
-	//	while (!stopHilo) {
+		while (!stopHilo) {
 			try {
 	            while (porcentaje < 100) {
-	                numAleatorio = generaNumeroAleatorio(1, 15);
+	                numAleatorio = generaNumeroAleatorio(1, 10);
 	              //  System.out.println("Hilo " + nombre + " ha aumentado en " + numAleatorio);
 	                porcentaje = porcentaje + numAleatorio;
-	                System.out.println("Porcentaje en el hilo : " + nombre +" " + porcentaje);
+	          //      System.out.println("Porcentaje en el hilo : " + nombre +" " + porcentaje);
 	                // aqui compruebo si el hilo es el ganador
 	                if (porcentaje <100) {  // si aun no ha ganado actualiza la vista
 		                // aqui debe actualizar la barra de progresión y el texto 
 		                pb.setValue(porcentaje);
+		                // refrescar progress bar
+		              //  pb.repaint();
 		                txt.setText("Hilo"+ nombre + "  "+ String.valueOf(porcentaje));
 		                
-		                System.out.println("Hilo"+ nombre + "  "+ String.valueOf(porcentaje));
+		           //    System.out.println("Hilo"+ nombre + "  "+ String.valueOf(porcentaje));
 		            	 // el hilo duerme el tiempo que se le pasa al constructor
 		              //  sleep((long) numSleep);
 		                sleep (100);
@@ -75,17 +77,20 @@ public class Hilo extends Thread{
 	                	//la primera vez que se entra por aquí lo hace el hilo ganador
 	                	// se llama al jdialog y se muestra al ganador.
 	                	porcentaje = 100;
-	                	 System.out.println("HILO GANADOR"+ nombre + "  "+ String.valueOf(porcentaje));
+	               // 	 System.out.println("HILO GANADOR"+ nombre + "  "+ String.valueOf(porcentaje));
 	                	pb.setValue(100);
+	                	
 		                txt.setText("Hilo"+ nombre + "  "+ "100");
 	                	JOptionPane.showMessageDialog(null, "Y EL GANADOR ES : HILO" + nombre);
 	                	// interrupt(); 
 		              //  nombreGanador = nombre;
-	                	System.out.println("GANADOR");
+	                //	System.out.println("pot");
 	                	// si ha ganado sale de la ejecución e interrumpe la ejecución del resto de hilos
 	                	// manda mensaje de interrumpir los hilos y salir
 	                }	
 				}
+	            System.out.println("HILO GANADOR"+ nombre + "  "+ String.valueOf(porcentaje));
+	         //   pb.setValue(porcentaje);
 	            stopHilo = true;
 	            System.out.println("fin");
 	           // terminar();
@@ -95,9 +100,9 @@ public class Hilo extends Thread{
 	        } catch (InterruptedException ex) {
 	            System.out.println("Hilo interrumpido");
 	        }
-	//	}
-		System.out.println(stopHilo);
-    }
+		}
+		//System.out.println(stopHilo);
+    }end run
  
     public static int generaNumeroAleatorio(int minimo, int maximo) {
         int num = (int) Math.floor(Math.random() * (maximo - minimo + 1) + (minimo));

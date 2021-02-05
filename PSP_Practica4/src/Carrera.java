@@ -68,19 +68,7 @@ public class Carrera {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		 btnComenzar = new JButton("Comenzar Carrera");
-		btnComenzar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				
-				comenzarCarrera();
-				 // cuando da al boton de aceptar el ganador se inicializan todos los valores
-		          inicializarDatos();
-            
-			
-			}
-		});
-		btnComenzar.setBounds(186, 11, 201, 23);
-		frame.getContentPane().add(btnComenzar);
+		
 		
 		sld1 = new JSlider();
 		sld1.setValue(5);
@@ -94,6 +82,7 @@ public class Carrera {
 		
 		 pb1 = new JProgressBar();
 		pb1.setStringPainted(true);
+	
 		pb1.setBounds(32, 100, 506, 23);
 		frame.getContentPane().add(pb1);
 		
@@ -141,7 +130,23 @@ public class Carrera {
 		txt3.setBounds(452, 296, 86, 20);
 		frame.getContentPane().add(txt3);
 		txt3.setColumns(10);
-	}
+		
+		
+		 btnComenzar = new JButton("Comenzar Carrera");
+			btnComenzar.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					
+					comenzarCarrera();
+					 // cuando da al boton de aceptar el ganador se inicializan todos los valores
+			      //    inicializarDatos();
+	            
+				
+				}
+			});
+			btnComenzar.setBounds(186, 11, 201, 23);
+			frame.getContentPane().add(btnComenzar);
+		
+	} //fin initialize
 	
 	public void comenzarCarrera() {
 		
@@ -159,50 +164,87 @@ public class Carrera {
 		deslizadores[0] = sld1;
 		deslizadores[1] = sld2;
 		deslizadores[2] = sld3;
-		
+	
 		
 	//	textos[0].setText("GANADOR");
         for (int i = 0; i < hilos.length; i++) {
-                
+              
+       
         	numAleatorio = (long) Math.floor(Math.random() *1000)+1;
             Hilo h = new Hilo((i+1)+"",barras[i], textos[i], numAleatorio);
        
             hilos[i] =h;
             // damos la prioridad al hilo
             h.setPriority(deslizadores[i].getValue());
-            System.out.println("prioridad : "+ deslizadores[i].getValue());
+      //      System.out.println("prioridad : "+ deslizadores[i].getValue());
             h.start();
            
-        }
+        } // end for
         
         // nombreGanador es una variable global
      //   JOptionPane.showMessageDialog(null, "Y EL GANADOR ES : HILO" + nombreGanador);
-    /*    try {
+     /*   try {
             //Ponemos a "Dormir" el programa durante los ms que queremos
-            Thread.sleep(5*10);
+            Thread.sleep(5*1);
          } catch (Exception e) {
             System.out.println(e);
          }
       */  //comprobar si alguno de los hilos llega a 100 y parar los otros dos
-    /*    while (noGanador){
+        while (noGanador){
+        	pb1.setValue(50);
         	for (int i = 0; i < hilos.length; i++) {
         	//	System.out.println("PORCENTAJE HILO : "+hilos[i].getNombre() +" "+hilos[i].getPorcentaje());
+        		// me devuelve la progresBar del hilo que se ejecuta (pb1,pb2 o pb3)
+        		int p = hilos[i].getJProgressBar().getValue();
+        		try {
+					Thread.sleep(100);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+        		switch (i)
+        		{
+        		case 1:
+        			System.out.println("case 1");
+        			pb1.setValue(p);
+        			break;
+        		case 2:
+        			System.out.println("case 2");
+        		//	pb2.setValue(p);
+        			break;
+        		case 3:
+        			System.out.println("case 3");
+        		//	pb3.setValue(p);
+        			break;
+        		}
+        	//	int porcentaje = hilos[i].getPorcentaje();
         		
+        		// barras[i].getValue() = hilos[i].getJProgressBar().getValue();
+        		
+        	//	System.out.println ("p : "+ p +" "+ "barras "+pb1);
+        //		barras[i].setStringPainted(true);
+        	//	barras[i].setValue(p);
+        		
+        	   
+        	 //   barras[i].repaint();      
+        
+    
         		if (hilos[i].getPorcentaje() == 100) {
-        			System.out.println("AAAAAAA");
+        		//	System.out.println("AAAAAAA");
         			// el hilo i + 1 será el ganador y hay que parar los otros dos
         			for (int j = 0; j < hilos.length; j++) {
         				hilos[j].setStopHilo(true);
-        			}
+        			} // end for
         			noGanador = false;
+        		// actualizar progresBar
         			
-        		}
+        		} // end if
         	//	System.out.println("estado hilo : "+hilos[i].getNombre() +" " + hilos[i].getState());	
-        	}
-        }
-     */
+      	} // end for
+        } //end while
      
-	}
+     
+	} // end ComenzarCarrera
 	
 	public void inicializarDatos() {
 		 
