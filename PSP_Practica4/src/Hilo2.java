@@ -6,7 +6,7 @@ import javax.swing.JSlider;
 import javax.swing.JTextField;
 
 
-public class Hilo extends Thread{
+public class Hilo2 extends Thread{
 	
 
 	private boolean stopHilo = false;
@@ -15,17 +15,17 @@ public class Hilo extends Thread{
 	private JProgressBar pb;
 	private JTextField txt;
 	private float numSleep;
-	private Hilo2 hilo2;
+	private Hilo hilo;
 	private Hilo3 hilo3;
 	private JButton boton;
 	
-	public Hilo (String nombre, JProgressBar pb, JTextField txt,  float numSleep, Hilo2 hilo2, Hilo3 hilo3,JButton boton) {
+	public Hilo2 (String nombre, JProgressBar pb, JTextField txt,  float numSleep, Hilo hilo, Hilo3 hilo3, JButton boton) {
 		this.nombre = nombre;
 		this.pb = pb;
 		this.porcentaje = 0;
 		this.txt = txt;
 		this.numSleep = numSleep;
-		this.hilo2 = hilo2;
+		this.hilo = hilo;
 		this.hilo3 = hilo3;
 		this.boton = boton;
 	}
@@ -48,30 +48,31 @@ public class Hilo extends Thread{
 	
 	public void setStopHilo(boolean fin) {
 		this.stopHilo = fin;
-	}
-	public void setHilo2(Hilo2 hilo2) {
-		this.hilo2 = hilo2;
-	}
+		}
+	public void setHilo(Hilo hilo) {
+			this.hilo = hilo;
+		}
 	public void setHilo3(Hilo3 hilo3) {
-		this.hilo3 = hilo3;
-	}
+			this.hilo3 = hilo3;
+		}
+	
+
 	
 	@Override
 	public void run() {
 		
-		porcentaje = 0;
-		int numAleatorio;
+			porcentaje = 0;
+			int numAleatorio;
 		
-		// poner todos los datos a 0 y duermo durante 1000 ms para que se vea que empiezan todos a 0
-		pb.setValue(0);
-		txt.setText("Hilo1 0");
-		try {
-			sleep(1000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	
+			// poner todos los datos a 0 y duermo durante 1000 ms para que se vea que empiezan todos a 0
+			pb.setValue(0);
+			txt.setText("Hilo2  0 ");
+			try {
+				sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			try {
 	            while ((porcentaje < 100) && !stopHilo) {
 	                numAleatorio = generaNumeroAleatorio(1, 15);
@@ -96,27 +97,27 @@ public class Hilo extends Thread{
 	                	 System.out.println("HILO GANADOR"+ nombre + "  "+ String.valueOf(porcentaje));
 	                	pb.setValue(100);
 		                txt.setText("Hilo"+ nombre + "  "+ "100");
-		                hilo2.setStopHilo(true);
+		                hilo.setStopHilo(true);
 	                	hilo3.setStopHilo(true);
 	                	JOptionPane.showMessageDialog(null, "Y EL GANADOR ES : HILO" + nombre);
 	                	this.boton.setEnabled(true); // no se activa el boton de comenzar hasta que uno de los hilos haya ganado
 	                	System.out.println("GANADOR");
 	                	// si ha ganado sale de la ejecución e interrumpe la ejecución del resto de hilos
 	                	// manda mensaje de interrumpir los hilos y salir
-	                	 stopHilo = true;
-   	
+	                	 stopHilo = true;   
 	                }
 	            
 				} // end while
 	            
 	            System.out.println("fin");
 	           // terminar();
-       
+	         
+	           
 	           
 	        } catch (InterruptedException ex) {
 	            System.out.println("Hilo interrumpido");
 	        }
-
+	
 		System.out.println(stopHilo);
     }
  
