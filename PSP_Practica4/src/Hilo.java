@@ -64,7 +64,7 @@ public class Hilo extends Thread{
 		
 		// poner todos los datos a 0 y duermo durante 1000 ms para que se vea que empiezan todos a 0
 		pb.setValue(0);
-		txt.setText("Hilo1 0");
+		txt.setText("Hilo1  0");
 		try {
 			sleep(1000);
 		} catch (InterruptedException e) {
@@ -75,7 +75,7 @@ public class Hilo extends Thread{
 			try {
 	            while ((porcentaje < 100) && !stopHilo) {
 	                numAleatorio = generaNumeroAleatorio(1, 15);
-	              //  System.out.println("Hilo " + nombre + " ha aumentado en " + numAleatorio);
+	             
 	                porcentaje = porcentaje + numAleatorio;
 	            //    porcentaje = porcentaje + (int)numSleep;
 	                System.out.println("Porcentaje en el hilo : " + nombre +" " + porcentaje);
@@ -88,7 +88,7 @@ public class Hilo extends Thread{
 		                System.out.println("Hilo"+ nombre + "  "+ String.valueOf(porcentaje));
 		            	 // el hilo duerme el tiempo que se le pasa al constructor
 		                sleep((long) numSleep);
-		              //  sleep (1000);
+		             
 	                }else { 
 	                	//la primera vez que se entra por aquí lo hace el hilo ganador
 	                	// se llama al jdialog y se muestra al ganador.

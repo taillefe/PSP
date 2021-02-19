@@ -76,9 +76,9 @@ public class Hilo3 extends Thread{
 			try {
 	            while ((porcentaje < 100) && !stopHilo) {
 	                numAleatorio = generaNumeroAleatorio(1, 15);
-	              //  System.out.println("Hilo " + nombre + " ha aumentado en " + numAleatorio);
+	             
 	                porcentaje = porcentaje + numAleatorio;
-	            //    porcentaje = porcentaje + (int)numSleep;
+	          
 	                System.out.println("Porcentaje en el hilo : " + nombre +" " + porcentaje);
 	                // aqui compruebo si el hilo es el ganador
 	                if (porcentaje <100) {  // si aun no ha ganado actualiza la vista
@@ -89,7 +89,7 @@ public class Hilo3 extends Thread{
 		                System.out.println("Hilo"+ nombre + "  "+ String.valueOf(porcentaje));
 		            	 // el hilo duerme el tiempo que se le pasa al constructor
 		                sleep((long) numSleep);
-		              //  sleep (1000);
+		              
 	                }else { 
 	                	//la primera vez que se entra por aquí lo hace el hilo ganador
 	                	// se llama al jdialog y se muestra al ganador.
