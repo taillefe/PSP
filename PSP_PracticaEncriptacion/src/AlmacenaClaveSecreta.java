@@ -5,7 +5,7 @@ public class AlmacenaClaveSecreta {
 
 	public static void main(String[] args) {
 		try {
-			KeyGenerator kg = KeyGenerator.getlnstance("AES");
+			KeyGenerator kg = KeyGenerator.getInstance("AES");
 			kg.init (128);
 			//genera clave secreta
 			SecretKey clave = kg.generateKey();
