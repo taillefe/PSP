@@ -9,6 +9,7 @@ public class AlmacenaClaveSecreta {
 			kg.init (128);
 			//genera clave secreta
 			SecretKey clave = kg.generateKey();
+			//la almacena en un fichero Clave.secreta
 			ObjectOutputStream out = new ObjectOutputStream(
 			new FileOutputStream("Clave.secreta"));
 			out.writeObject(clave);
