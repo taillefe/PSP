@@ -4,27 +4,27 @@ import javax.crypto.*;
 public class Cifrado {
 	public static void main(String[] args) {
 		try {
-			//RECUPERAMOS CLAVE SECRETA DEL FICHERO Clave.secreta
+			//se recupera la clave secreta del fichero clave.ken
 			ObjectInputStream oin = new ObjectInputStream(
-			new FileInputStream("Clave.secreta"));
+			new FileInputStream("clave.ken"));
 			Key clavesecreta = (Key) oin.readObject();
 			oin.close();
 			
-			//SE DEFINE EL OBJETO Cipher para encriptar
+			//se obtiene el objeto Cipher para encriptar
 			Cipher c = Cipher.getInstance("AES/ECB/PKCS5Padding");
 			c.init(Cipher.ENCRYPT_MODE, clavesecreta);
 			
-			//FICHERO A CIFRAR
-			FileInputStream filein = new FileInputStream("FICHERO.pdf");
+			//fichero para cifrar
+			FileInputStream filein = new FileInputStream("fichero.pdf");
 			
-			//OBJETO CipherOutputStream QUE ENCRIPTA EL FICHERO
+			//objeto CipherOutputStream que encripta el fichero
 			CipherOutputStream out = new CipherOutputStream(
 			new FileOutputStream("FicheroPDF.Cifrado"), c);
 			int tambloque = c.getBlockSize();//tamaño de bloque objeto Cipher
 			byte[] bytes = new byte[tambloque];//bloque de bytes
 		
-			//LEEMOS BLOQUES DE BYTES DEL FICHERO PDF
-			//Y LO VAMOS ESCRIBIENDO AL CipherOutputStream
+			//se leen los bloques de bytes del fichero PDF
+			//y se escribe al CipherOutputStream
 			int i = filein.read(bytes);
 			while (i != -1) {
 			out.write(bytes, 0, i);
@@ -36,4 +36,4 @@ public class Cifrado {
 			System.out.println("Fichero cifrado con clave secreta.");
 		} catch (Exception e) {e .printStackTrace ();}
 	}//main .
-}//.. Cifrado
+}// end  Cifrado
